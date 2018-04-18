@@ -16,7 +16,7 @@ string giraffe::render(int line){
     }
 }
 
-Hedgehog::Giraffe(string name, int manaCost, int attack, int defense){ 
+Giraffe::Giraffe(string name, int manaCost, int attack, int defense){ 
     name = "Giraffe";
     manaCost = 5;
     attack = 400;
