@@ -16,7 +16,7 @@ string Frog::render(int line){
     }
 }
 
-Hedgehog::Frog(string name, int manaCost, int attack, int defense){ 
+Frog::Frog(string name, int manaCost, int attack, int defense){ 
     name = "Frog";
     manaCost = 1;
     attack = 100;
