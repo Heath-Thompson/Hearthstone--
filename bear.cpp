@@ -16,9 +16,9 @@ string Bear::render(int line){
     }
 }
 
-Hedgehog::Bear(string name, int manaCost, int attack, int defense){ 
+Bear::Bear(string name, int manaCost, int attack, int defense){ 
     name = "Bear";
-    manaCost = 6;
-    attack = 500;
-    defense = 600;
+    manaCost = manaCost;
+    attack = attack;
+    defense = defense;
 }
