@@ -16,7 +16,7 @@ string Rabbit::render(int line){
     }
 }
 
-Hedgehog::Rabbit(string name, int manaCost, int attack, int defense){ 
+Rabbit::Rabbit(string name, int manaCost, int attack, int defense){ 
     name = "Rabbit";
     manaCost = 2;
     attack = 200;
