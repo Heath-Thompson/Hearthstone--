@@ -1,33 +1,50 @@
 #include <iostream>
 #include <vector>
+#include <cstdlib>
 #include "board.h"
 
 using namespace std;
 
 Board::Board(){
     hp = 2000;
+    mana = 0;
+    maxMana = 0;
 }
 
 void Board::addToDeckList(Card* c){
-    if(deck.size() <= 21){
-        deck.push_back(c);   
+    if(deck.size() < 21){
+        deck.push_back(c);
+    }
+}
+int Board::getDeck(){
+    return deck.size();
+}
+
+Card* Board::showHand(){
+    for (int i = 0; i < hand.size(); i++){
+        cout << i << ": " << hand[i]->getName() << "(" << hand[i]->getManaCost() << ")" << endl;
+    }
+}
+
+Card* Board::showField() {
+    cout << endl;
+    for (int i = 0; i < getFieldSize(); i++){
+        cout << i + 1 << ": " << field[i]->getName() << endl;
     }
 }
 
 void Board::draw(int num){
-    Card* temp; 
-    int j = 20;
+    int j = deck.size() - 1;
     for(int i = 0; i < num; i++){
-        temp = deck[j];
+        hand.push_back(deck[j]);
         j--;
-        deck.pop_back();
-        hand.push_back(temp);       
     }
 }
 
 void Board::playCardFromHand(int indx){
     Card* temp = hand[indx];
     field.push_back(hand[indx]);
+    hand.erase(hand.begin() + indx);
     mana -= temp->getManaCost();
 }
 
@@ -40,23 +57,31 @@ Card* Board::getCardInHand(int indx){
 }
 
 int Board::getHP(){
-    return hp;   
+    return hp;
+}
+
+void Board::setHP(int n){
+    hp = n;
 }
 
 int Board::getHandSize(){
-    return hand.size();   
+    return hand.size();
 }
 
 int Board::getFieldSize(){
-    return field.size();   
+    return field.size();
+}
+
+void Board::setMaxMana(int m) {
+    maxMana = m;
 }
 
 int Board::getMana(){
-    return mana;   
+    return mana;
 }
 
-void Board::setMana(int m){
-    mana = m;
+void Board::incMana(){
+    mana++;
 }
 
 void Board::discardCardFromField(int indx){
@@ -67,7 +92,7 @@ void Board::discardCardFromField(int indx){
 
 void Board::unExhaustField(){
     for (int i = 0; i < field.size(); i++){
-        field.unExhaust();   
+        field[i]->unExhaust();
     }
 }
 
@@ -84,7 +109,6 @@ void Board::shuffleDeck(void){
     }
 }
 
-
 void Board::renderMana(void){
     cout << "MANA: ";
     for(int i = 1; i <= maxMana; i++){
@@ -93,7 +117,7 @@ void Board::renderMana(void){
         else
             cout << "O ";
     }
-        
+
     cout << endl;
 }
 
